@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Gota de agua del icono (zona segura central de 66dp dentro de 108dp) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M54,28 C54,28 36,50 36,63 A18,18 0 0,0 72,63 C72,50 54,28 54,28 Z" />
+    <path android:fillColor="#0B7DDA"
+        android:pathData="M45,62 A9,9 0 0,0 54,71 L54,75 A13,13 0 0,1 41,62 Z" />
+</vector>
