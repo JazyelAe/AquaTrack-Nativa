@@ -50,9 +50,24 @@ adb shell settings put global window_animation_scale 0
 adb shell settings put global transition_animation_scale 0
 adb shell settings put global animator_duration_scale 0
 
+# Esperar a que Android termine de arrancar por completo (launcher listo).
+until [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1" ]; do sleep 2; done
+sleep 20
+adb shell input keyevent KEYCODE_WAKEUP
+adb shell wm dismiss-keyguard
+
+# Abre la app y confirma que está en primer plano (reintenta si el sistema aún no responde).
+abrir() {
+  for intento in 1 2 3 4 5 6; do
+    adb shell am start -W -n "$PKG/.MainActivity" >/dev/null; sleep 4
+    if existe "Hoy" && existe "Otra cantidad"; then return 0; fi
+    anota "  reintento al abrir la app ($intento)"; sleep 5
+  done
+  return 1
+}
+
 # 1. Inicio
-adb shell am start -W -n "$PKG/.MainActivity" >/dev/null; sleep 4
-existe "Hoy" && anota "CA-3 la app abre: OK"
+abrir && anota "CA-3 la app abre: OK"
 cap 01_inicio.png
 
 # 2. Registro de tomas: 250 + 500 + 250 = 1000 ml
@@ -75,7 +90,7 @@ tocar text "+500 ml"
 
 # 4. Persistencia: cerrar la app por completo y volver a abrirla
 adb shell am force-stop "$PKG"; sleep 1
-adb shell am start -W -n "$PKG/.MainActivity" >/dev/null; sleep 4
+abrir
 existe "2000 ml" && anota "CA-7 los datos persisten al cerrar y abrir (2000 ml): OK"
 
 # 5. Historial
