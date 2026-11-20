@@ -52,7 +52,16 @@ adb shell settings put global animator_duration_scale 0
 
 # Esperar a que Android termine de arrancar por completo (launcher listo).
 until [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1" ]; do sleep 2; done
-sleep 20
+# Cambiar el idioma del sistema a español (México) y reiniciar la interfaz de Android.
+adb root >/dev/null 2>&1; sleep 3
+adb shell "setprop persist.sys.locale es-MX; setprop ctl.restart zygote"; sleep 15
+# Esperar a que el launcher (pantalla de inicio) esté al frente.
+for i in $(seq 1 60); do
+  adb shell dumpsys activity activities 2>/dev/null | grep -q "ResumedActivity.*launcher" && break
+  sleep 3
+done
+anota "Idioma del sistema: $(adb shell getprop persist.sys.locale)"
+sleep 10
 adb shell input keyevent KEYCODE_WAKEUP
 adb shell wm dismiss-keyguard
 
