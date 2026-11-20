@@ -2,8 +2,8 @@
 
 **Materia:** Aplicaciones Web Progresivas · Unidad I · Actividad Apertura
 **Alumno:** Jahir Jaziel Serrano Arana · 10° D
-**Repositorio:** `JazyelAe/kotlin` (se propone renombrarlo a `AquaTrack-Nativa`)
-**Estado:** borrador para aprobación (Checkpoint A)
+**Repositorio:** `JazyelAe/AquaTrack-Nativa` (antes `kotlin`; renombrado con aprobación)
+**Estado:** aprobado el 20/11/2026 · implementado · en pruebas en dispositivo
 
 ## 1. Objetivo
 Construir una app **nativa de Android** escrita en Kotlin con el SDK oficial (Jetpack Compose + Material 3) que ayude a registrar el consumo diario de agua. Debe usar funciones propias del sistema operativo (notificaciones locales, tareas en segundo plano con WorkManager, vibración y almacenamiento local), que es lo que la distingue de una app web o multiplataforma.
@@ -100,4 +100,15 @@ Yo genero el diagrama de arquitectura (Kotlin → compilado para Android → API
 Fuentes técnicas para el reporte (comprobadas): Android Developers — Platform architecture, Jetpack Compose, WorkManager y Notification runtime permission.
 
 ## 11. Pruebas
-_(Se llena después de implementar: ✅/❌ por cada criterio.)_
+| # | Resultado | Evidencia |
+|---|---|---|
+| CA-1 | ✅ El workflow pasó en verde al primer intento (run 44800827821 en `main` y 44801511876 en `v1.0.0`). | Pestaña Actions |
+| CA-2 | ✅ Release `v1.0.0` con `AquaTrack-v1.0.0.apk` (9.4 MB); la descarga responde HTTP 200. | `09_release.png` |
+| CA-3 | ⏳ Pendiente de instalar en un teléfono (no hay emulador en la PC de desarrollo). | `01_inicio.png` |
+| CA-4 | ⏳ Pendiente en dispositivo. | `02_registro.png` |
+| CA-5 | ⏳ Pendiente en dispositivo. | `05_ajustes.png` |
+| CA-6 | ⏳ Pendiente en dispositivo. | `03_meta_alcanzada.png` |
+| CA-7 | ⏳ Pendiente en dispositivo. | `04_historial.png` |
+| CA-8 | ⏳ Pendiente en dispositivo Android 13+. | `06_permiso.png` |
+| CA-9 | ⏳ Pendiente en dispositivo. | `07_notificacion.png` |
+| CA-10 | ✅ README con descripción, tecnologías, instrucciones y enlaces (faltan las capturas del teléfono). | README.md |
