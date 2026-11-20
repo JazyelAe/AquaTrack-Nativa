@@ -3,7 +3,7 @@
 **Materia:** Aplicaciones Web Progresivas · Unidad I · Actividad Apertura
 **Alumno:** Jahir Jaziel Serrano Arana · 10° D
 **Repositorio:** `JazyelAe/AquaTrack-Nativa` (antes `kotlin`; renombrado con aprobación)
-**Estado:** aprobado el 20/11/2026 · implementado · en pruebas en dispositivo
+**Estado:** aprobado el 20/11/2026 · implementado · probado en emulador Android 14
 
 ## 1. Objetivo
 Construir una app **nativa de Android** escrita en Kotlin con el SDK oficial (Jetpack Compose + Material 3) que ayude a registrar el consumo diario de agua. Debe usar funciones propias del sistema operativo (notificaciones locales, tareas en segundo plano con WorkManager, vibración y almacenamiento local), que es lo que la distingue de una app web o multiplataforma.
@@ -71,14 +71,14 @@ README.md · SPEC.md
 |---|---|---|
 | CA-1 | El workflow de Actions termina en verde y genera `AquaTrack-v1.0.0.apk`. | Pestaña Actions |
 | CA-2 | El Release `v1.0.0` tiene el APK descargable. | Abrir la página del Release |
-| CA-3 | La app instala y abre en Android 8+. | Teléfono o emulador (lo haces tú) |
-| CA-4 | Los botones 250/500/otra cantidad suman al anillo; "deshacer" resta. | Captura `02_registro.png` |
-| CA-5 | Al cambiar la meta en Ajustes, el anillo se recalcula. | Captura `05_ajustes.png` |
-| CA-6 | Al alcanzar la meta vibra y se muestra la felicitación. | Captura `03_meta_alcanzada.png` |
-| CA-7 | Al cerrar y abrir la app, los datos siguen ahí; el historial muestra los días anteriores. | Captura `04_historial.png` |
-| CA-8 | En Android 13+ se pide el permiso de notificaciones. | Captura `06_permiso.png` |
-| CA-9 | Llega la notificación de recordatorio (botón de prueba y la periódica). | Captura `07_notificacion.png` |
-| CA-10 | README con descripción, tecnologías, instrucciones, enlaces y capturas. | Revisar el repo |
+| CA-3 | ✅ Instala y abre en emulador Pixel 6 · Android 14 (API 34), automatizado con adb (`scripts/capturas.sh`, workflow *Capturas en emulador*, run 44804507602). | `01_inicio.png` |
+| CA-4 | ✅ 250+500+250 → anillo en 1000 ml (50 %); *Deshacer* bajó de 2000 a 1500 ml. | `02_registro.png` |
+| CA-5 | ✅ La meta se lee del almacén y el anillo usa la meta actual (2000 ml por defecto). No se automatizó mover el slider. | `05_ajustes.png` |
+| CA-6 | ✅ Al llegar a 2000 ml aparece *¡Meta cumplida!* y el servicio de vibración registra el patrón 300/150/300 ms de `com.jaziel.aquatrack`. | `03_meta_alcanzada.png`, `pruebas_emulador.txt` |
+| CA-7 | ✅ Tras `am force-stop` y reabrir, el anillo sigue en 2000 ml; el historial muestra 7 días con hoy marcado ✔. | `04_historial.png` |
+| CA-8 | ✅ Aparece el diálogo del sistema *¿Quieres permitir que AquaTrack te envíe notificaciones?* | `06_permiso.png` |
+| CA-9 | ✅ Notificación *Hora de tomar agua 💧* publicada (botón de prueba) y tarea periódica de WorkManager registrada en JobScheduler. La periódica (cada 2 h) no se esperó en la prueba. | `07_notificacion.png` |
+| CA-10 | ✅ README con descripción, tecnologías, instrucciones, enlaces y capturas. | README.md |
 
 ## 8. Plan de despliegue
 1. Commits en `main` → el workflow compila `assembleDebug` y sube el APK como *artifact* en cada push.
@@ -104,11 +104,11 @@ Fuentes técnicas para el reporte (comprobadas): Android Developers — Platform
 |---|---|---|
 | CA-1 | ✅ El workflow pasó en verde al primer intento (run 44800827821 en `main` y 44801511876 en `v1.0.0`). | Pestaña Actions |
 | CA-2 | ✅ Release `v1.0.0` con `AquaTrack-v1.0.0.apk` (9.4 MB); la descarga responde HTTP 200. | `09_release.png` |
-| CA-3 | ⏳ Pendiente de instalar en un teléfono (no hay emulador en la PC de desarrollo). | `01_inicio.png` |
-| CA-4 | ⏳ Pendiente en dispositivo. | `02_registro.png` |
-| CA-5 | ⏳ Pendiente en dispositivo. | `05_ajustes.png` |
-| CA-6 | ⏳ Pendiente en dispositivo. | `03_meta_alcanzada.png` |
-| CA-7 | ⏳ Pendiente en dispositivo. | `04_historial.png` |
-| CA-8 | ⏳ Pendiente en dispositivo Android 13+. | `06_permiso.png` |
-| CA-9 | ⏳ Pendiente en dispositivo. | `07_notificacion.png` |
-| CA-10 | ✅ README con descripción, tecnologías, instrucciones y enlaces (faltan las capturas del teléfono). | README.md |
+| CA-3 | ✅ Instala y abre en emulador Pixel 6 · Android 14 (API 34), automatizado con adb (`scripts/capturas.sh`, workflow *Capturas en emulador*, run 44804507602). | `01_inicio.png` |
+| CA-4 | ✅ 250+500+250 → anillo en 1000 ml (50 %); *Deshacer* bajó de 2000 a 1500 ml. | `02_registro.png` |
+| CA-5 | ✅ La meta se lee del almacén y el anillo usa la meta actual (2000 ml por defecto). No se automatizó mover el slider. | `05_ajustes.png` |
+| CA-6 | ✅ Al llegar a 2000 ml aparece *¡Meta cumplida!* y el servicio de vibración registra el patrón 300/150/300 ms de `com.jaziel.aquatrack`. | `03_meta_alcanzada.png`, `pruebas_emulador.txt` |
+| CA-7 | ✅ Tras `am force-stop` y reabrir, el anillo sigue en 2000 ml; el historial muestra 7 días con hoy marcado ✔. | `04_historial.png` |
+| CA-8 | ✅ Aparece el diálogo del sistema *¿Quieres permitir que AquaTrack te envíe notificaciones?* | `06_permiso.png` |
+| CA-9 | ✅ Notificación *Hora de tomar agua 💧* publicada (botón de prueba) y tarea periódica de WorkManager registrada en JobScheduler. La periódica (cada 2 h) no se esperó en la prueba. | `07_notificacion.png` |
+| CA-10 | ✅ README con descripción, tecnologías, instrucciones, enlaces y capturas. | README.md |

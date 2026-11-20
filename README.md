@@ -45,8 +45,15 @@ app/src/main/java/com/jaziel/aquatrack/
 - **GitHub Actions:** cada push a `main` compila el APK; una etiqueta `v*` crea el Release.
 
 ## Capturas
-Se encuentran en [`docs/capturas/`](docs/capturas/).
+Tomadas en un emulador Pixel 6 con Android 14, instalando el APK del Release (workflow *Capturas en emulador*).
+
+| Hoy | Registro | Meta cumplida | Historial |
+|---|---|---|---|
+| ![](docs/capturas/01_inicio.png) | ![](docs/capturas/02_registro.png) | ![](docs/capturas/03_meta_alcanzada.png) | ![](docs/capturas/04_historial.png) |
+| **Ajustes** | **Permiso** | **Notificación** | **Icono** |
+| ![](docs/capturas/05_ajustes.png) | ![](docs/capturas/06_permiso.png) | ![](docs/capturas/07_notificacion.png) | ![](docs/capturas/08_icono.png) |
 
 ## Documentación
 - Especificación y pruebas: [SPEC.md](SPEC.md)
+- Reporte PDF: https://github.com/JazyelAe/AWP-Unidad-I/blob/main/reportes/SP1_Aplicacion_Nativa_SerranoArana.pdf
 - Repositorio central de la unidad: https://github.com/JazyelAe/AWP-Unidad-I
