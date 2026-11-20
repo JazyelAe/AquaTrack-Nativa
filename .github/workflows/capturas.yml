@@ -34,7 +34,7 @@ jobs:
           arch: x86_64
           profile: pixel_6
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -change-locale es-MX
-          disable-animations: true
+          disable-animations: false
           script: bash scripts/capturas.sh AquaTrack.apk
 
       - name: Guardar capturas
